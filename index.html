@@ -12,7 +12,7 @@
   <script async 
   src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?
   client=ca-pub-1879022083268572"
-     crossorigin="anonymous"></script>
+       crossorigin="anonymous"></script>
 </head>
 <body>
   <h2>Assertive Action Coach</h2>
@@ -112,6 +112,83 @@
       }
 
       // Display output
+      document.getElementById("output").innerHTML = `
+        <strong>Action:</strong> ${result.action}<br>
+        <strong>Reason:</strong> ${result.reason}<br>
+        <strong>Example:</strong> ${result.example}
+      `;
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assertive Action Coach</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    select, input, button { margin: 10px 0; padding: 10px; width: 100%; max-width: 400px; }
+    .output { margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1879022083268572"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <h2>Assertive Action Coach</h2>
+  <a href="https://www.buymeacoffee.com/shashankparipalli" target="_blank">Buy me a coffee</a>
+
+  <label for="situationSelect">Select a situation:</label>
+  <select id="situationSelect">
+    <option value="">-- Select Situation --</option>
+    <option value="insult">Someone insults you</option>
+    <option value="examFail">Failed in an exam</option>
+    <option value="teacherPunish">Teacher punishes unfairly</option>
+    <option value="strangerAttack">Stranger physically attacks</option>
+    <option value="bully">Bullied at school/college</option>
+    <option value="familyArgument">Family argument</option>
+    <option value="workStress">Stress at work</option>
+  </select>
+
+  <br><br>
+
+  <label for="situationSearch">Or type your own situation:</label>
+  <input type="text" id="situationSearch" placeholder="Type your situation here...">
+
+  <br><br>
+  <button onclick="getAction()">Get Action</button>
+
+  <div id="output" class="output"></div>
+
+  <script>
+    const situations = {
+      "insult": { action: "Stay calm, respond firmly but without abuse.", reason: "Maintains your dignity and prevents escalation.", example: "If a classmate mocks you, reply with confidence: 'I don’t accept being spoken to like that.'" },
+      "examFail": { action: "Accept the result, analyze mistakes, prepare again.", reason: "Failure is temporary, learning ensures long-term success.", example: "Many toppers once failed exams but succeeded later by trying again." },
+      "teacherPunish": { action: "Stay respectful, explain your side calmly, escalate if unfair.", reason: "Balances respect with standing up for your rights.", example: "If punished without reason, request politely: 'May I explain?'" },
+      "strangerAttack": { action: "Defend, escape, call for help. Hit only if no other option.", reason: "Protects life and avoids unnecessary risk.", example: "If grabbed by a stranger, shouting 'Help!' and running to safety is best." },
+      "bully": { action: "Stand tall, use assertive words, seek support.", reason: "Prevents fear and stops repeated bullying.", example: "If bullied, say: 'Stop. I won’t allow this.' Report if it continues." },
+      "familyArgument": { action: "Listen, stay calm, express your point respectfully.", reason: "Keeps relationships strong while solving the issue.", example: "Instead of shouting at parents, explain: 'I feel hurt when…'" },
+      "workStress": { action: "Break tasks, prioritize, take short rests.", reason: "Reduces overload and increases efficiency.", example: "Divide a big project into smaller steps and complete gradually." }
+    };
+    const fallback = { action: "Stay calm, analyze the situation, choose safety first.", reason: "Clear thinking prevents harm and ensures logical response.", example: "For example, if someone misbehaves, step back, assess if confrontation or avoidance is safer." };
+
+    function getAction() {
+      const selected = document.getElementById("situationSelect").value;
+      const typed = document.getElementById("situationSearch").value.trim().toLowerCase();
+      let result;
+      if (typed) {
+        if (typed.includes("insult")) result = situations["insult"];
+        else if (typed.includes("fail")) result = situations["examFail"];
+        else if (typed.includes("teacher")) result = situations["teacherPunish"];
+        else if (typed.includes("attack")) result = situations["strangerAttack"];
+        else if (typed.includes("bully")) result = situations["bully"];
+        else if (typed.includes("family")) result = situations["familyArgument"];
+        else if (typed.includes("work") || typed.includes("stress")) result = situations["workStress"];
+        else result = fallback;
+      } else if (selected) result = situations[selected];
+      else result = { action: "Please select or type a situation.", reason: "", example: "" };
+
       document.getElementById("output").innerHTML = `
         <strong>Action:</strong> ${result.action}<br>
         <strong>Reason:</strong> ${result.reason}<br>
